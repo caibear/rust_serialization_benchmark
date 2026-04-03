@@ -76,6 +76,11 @@ use crate::{generate_vec, Generate};
     derive(wincode::SchemaWrite, wincode::SchemaRead),
     wincode(tag_encoding = "u8")
 )]
+#[cfg_attr(
+    feature = "zerompk",
+    derive(zerompk::ToMessagePack, zerompk::FromMessagePack),
+    msgpack(c_enum)
+)]
 #[repr(u8)]
 pub enum GameType {
     #[cfg_attr(feature = "bilrost", bilrost(0))]
@@ -223,6 +228,10 @@ impl From<rpb::minecraft_savedata::GameType> for GameType {
 #[cfg_attr(feature = "nanoserde", derive(nanoserde::SerBin, nanoserde::DeBin))]
 #[cfg_attr(feature = "wiring", derive(Wiring, Unwiring))]
 #[cfg_attr(feature = "wincode", derive(wincode::SchemaWrite, wincode::SchemaRead))]
+#[cfg_attr(
+    feature = "zerompk",
+    derive(zerompk::ToMessagePack, zerompk::FromMessagePack)
+)]
 pub struct Item {
     #[cfg_attr(feature = "bilrost", bilrost(encoding(varint)))]
     #[cfg_attr(feature = "wiring", fixed(2))]
@@ -244,6 +253,10 @@ pub struct Item {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[cfg_attr(feature = "speedy", derive(speedy::Readable, speedy::Writable))]
 #[cfg_attr(feature = "wincode", derive(wincode::SchemaWrite, wincode::SchemaRead))]
+#[cfg_attr(
+    feature = "zerompk",
+    derive(zerompk::ToMessagePack, zerompk::FromMessagePack)
+)]
 pub struct BorrowItem<'a> {
     #[cfg_attr(feature = "bilrost", bilrost(encoding(varint)))]
     #[cfg_attr(feature = "minicbor", n(0))]
@@ -416,6 +429,10 @@ impl From<rpb::minecraft_savedata::Item> for Item {
 #[cfg_attr(feature = "nanoserde", derive(nanoserde::SerBin, nanoserde::DeBin))]
 #[cfg_attr(feature = "wiring", derive(Wiring, Unwiring))]
 #[cfg_attr(feature = "wincode", derive(wincode::SchemaWrite, wincode::SchemaRead))]
+#[cfg_attr(
+    feature = "zerompk",
+    derive(zerompk::ToMessagePack, zerompk::FromMessagePack)
+)]
 pub struct Abilities {
     #[cfg_attr(feature = "wiring", fixed)]
     #[cfg_attr(feature = "minicbor", n(0))]
@@ -584,6 +601,10 @@ impl From<rpb::minecraft_savedata::Abilities> for Abilities {
 #[cfg_attr(feature = "nanoserde", derive(nanoserde::SerBin, nanoserde::DeBin))]
 #[cfg_attr(feature = "wiring", derive(Wiring, Unwiring))]
 #[cfg_attr(feature = "wincode", derive(wincode::SchemaWrite, wincode::SchemaRead))]
+#[cfg_attr(
+    feature = "zerompk",
+    derive(zerompk::ToMessagePack, zerompk::FromMessagePack)
+)]
 pub struct Entity {
     #[cfg_attr(feature = "minicbor", b(0))]
     pub id: String,
@@ -631,6 +652,10 @@ pub struct Entity {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[cfg_attr(feature = "speedy", derive(speedy::Readable, speedy::Writable))]
 #[cfg_attr(feature = "wincode", derive(wincode::SchemaWrite, wincode::SchemaRead))]
+#[cfg_attr(
+    feature = "zerompk",
+    derive(zerompk::ToMessagePack, zerompk::FromMessagePack)
+)]
 pub struct BorrowEntity<'a> {
     #[cfg_attr(feature = "minicbor", b(0))]
     pub id: &'a str,
@@ -1046,6 +1071,10 @@ impl From<rpb::minecraft_savedata::Entity> for Entity {
 #[cfg_attr(feature = "nanoserde", derive(nanoserde::SerBin, nanoserde::DeBin))]
 #[cfg_attr(feature = "wiring", derive(Wiring, Unwiring))]
 #[cfg_attr(feature = "wincode", derive(wincode::SchemaWrite, wincode::SchemaRead))]
+#[cfg_attr(
+    feature = "zerompk",
+    derive(zerompk::ToMessagePack, zerompk::FromMessagePack)
+)]
 pub struct RecipeBook {
     #[cfg_attr(feature = "bilrost", bilrost(encoding(packed)))]
     #[cfg_attr(feature = "minicbor", n(0))]
@@ -1081,6 +1110,10 @@ pub struct RecipeBook {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[cfg_attr(feature = "speedy", derive(speedy::Readable, speedy::Writable))]
 #[cfg_attr(feature = "wincode", derive(wincode::SchemaWrite, wincode::SchemaRead))]
+#[cfg_attr(
+    feature = "zerompk",
+    derive(zerompk::ToMessagePack, zerompk::FromMessagePack)
+)]
 pub struct BorrowRecipeBook<'a> {
     #[cfg_attr(feature = "bilrost", bilrost(encoding(packed)))]
     #[cfg_attr(feature = "minicbor", b(0))]
@@ -1374,6 +1407,10 @@ impl From<rpb::minecraft_savedata::RecipeBook> for RecipeBook {
 #[cfg_attr(feature = "nanoserde", derive(nanoserde::SerBin, nanoserde::DeBin))]
 #[cfg_attr(feature = "wiring", derive(Wiring, Unwiring))]
 #[cfg_attr(feature = "wincode", derive(wincode::SchemaWrite, wincode::SchemaRead))]
+#[cfg_attr(
+    feature = "zerompk",
+    derive(zerompk::ToMessagePack, zerompk::FromMessagePack)
+)]
 pub struct Player {
     #[cfg_attr(feature = "wiring", fixed(3))]
     #[cfg_attr(feature = "minicbor", n(0))]
@@ -1446,6 +1483,10 @@ pub struct Player {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[cfg_attr(feature = "speedy", derive(speedy::Readable, speedy::Writable))]
 #[cfg_attr(feature = "wincode", derive(wincode::SchemaWrite, wincode::SchemaRead))]
+#[cfg_attr(
+    feature = "zerompk",
+    derive(zerompk::ToMessagePack, zerompk::FromMessagePack)
+)]
 pub struct BorrowPlayer<'a> {
     #[cfg_attr(feature = "minicbor", n(0))]
     pub game_type: GameType,
@@ -2069,6 +2110,10 @@ impl From<rpb::minecraft_savedata::Player> for Player {
 #[cfg_attr(feature = "nanoserde", derive(nanoserde::SerBin, nanoserde::DeBin))]
 #[cfg_attr(feature = "wiring", derive(Wiring, Unwiring))]
 #[cfg_attr(feature = "wincode", derive(wincode::SchemaWrite, wincode::SchemaRead))]
+#[cfg_attr(
+    feature = "zerompk",
+    derive(zerompk::ToMessagePack, zerompk::FromMessagePack)
+)]
 pub struct Players {
     #[cfg_attr(feature = "bilrost", bilrost(encoding(packed)))]
     #[cfg_attr(feature = "minicbor", n(0))]
@@ -2084,6 +2129,10 @@ pub struct Players {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[cfg_attr(feature = "speedy", derive(speedy::Readable, speedy::Writable))]
 #[cfg_attr(feature = "wincode", derive(wincode::SchemaWrite, wincode::SchemaRead))]
+#[cfg_attr(
+    feature = "zerompk",
+    derive(zerompk::ToMessagePack, zerompk::FromMessagePack)
+)]
 pub struct BorrowPlayers<'a> {
     #[cfg_attr(feature = "bilrost", bilrost(encoding(packed)))]
     #[cfg_attr(feature = "minicbor", b(0))]

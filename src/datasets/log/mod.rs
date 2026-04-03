@@ -66,6 +66,10 @@ use crate::Generate;
 #[cfg_attr(feature = "nanoserde", derive(nanoserde::SerBin, nanoserde::DeBin))]
 #[cfg_attr(feature = "wiring", derive(Wiring, Unwiring))]
 #[cfg_attr(feature = "wincode", derive(wincode::SchemaWrite, wincode::SchemaRead))]
+#[cfg_attr(
+    feature = "zerompk",
+    derive(zerompk::ToMessagePack, zerompk::FromMessagePack)
+)]
 pub struct Address {
     #[cfg_attr(feature = "wiring", fixed)]
     #[cfg_attr(feature = "minicbor", n(0))]
@@ -255,6 +259,10 @@ impl From<log_protobuf::log::Address> for Address {
 #[cfg_attr(feature = "nanoserde", derive(nanoserde::SerBin, nanoserde::DeBin))]
 #[cfg_attr(feature = "wiring", derive(Wiring, Unwiring))]
 #[cfg_attr(feature = "wincode", derive(wincode::SchemaWrite, wincode::SchemaRead))]
+#[cfg_attr(
+    feature = "zerompk",
+    derive(zerompk::ToMessagePack, zerompk::FromMessagePack)
+)]
 pub struct Log {
     #[cfg_attr(feature = "minicbor", n(0))]
     pub address: Address,
@@ -282,6 +290,10 @@ pub struct Log {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[cfg_attr(feature = "speedy", derive(speedy::Readable, speedy::Writable))]
 #[cfg_attr(feature = "wincode", derive(wincode::SchemaWrite, wincode::SchemaRead))]
+#[cfg_attr(
+    feature = "zerompk",
+    derive(zerompk::ToMessagePack, zerompk::FromMessagePack)
+)]
 pub struct BorrowLog<'a> {
     #[cfg_attr(feature = "minicbor", n(0))]
     pub address: Address,
@@ -536,6 +548,10 @@ impl From<log_protobuf::log::Log> for Log {
 #[cfg_attr(feature = "nanoserde", derive(nanoserde::SerBin, nanoserde::DeBin))]
 #[cfg_attr(feature = "wiring", derive(Wiring, Unwiring))]
 #[cfg_attr(feature = "wincode", derive(wincode::SchemaWrite, wincode::SchemaRead))]
+#[cfg_attr(
+    feature = "zerompk",
+    derive(zerompk::ToMessagePack, zerompk::FromMessagePack)
+)]
 pub struct Logs {
     #[cfg_attr(feature = "bilrost", bilrost(encoding(packed)))]
     #[cfg_attr(feature = "minicbor", n(0))]
@@ -551,6 +567,10 @@ pub struct Logs {
 #[derive(serde::Serialize, serde::Deserialize)]
 #[cfg_attr(feature = "speedy", derive(speedy::Readable, speedy::Writable))]
 #[cfg_attr(feature = "wincode", derive(wincode::SchemaWrite, wincode::SchemaRead))]
+#[cfg_attr(
+    feature = "zerompk",
+    derive(zerompk::ToMessagePack, zerompk::FromMessagePack)
+)]
 pub struct BorrowLogs<'a> {
     #[cfg_attr(feature = "bilrost", bilrost(encoding(packed)))]
     #[cfg_attr(feature = "minicbor", b(0))]
